@@ -4,11 +4,11 @@
 #include <sstream>
 #include <fstream>
 
-//#define SENSOR1_DIR "/sys/bus/iio/devices/iio:device0/in_voltage1_raw"
-//#define SENSOR2_DIR "/sys/bus/iio/devices/iio:device0/in_voltage2_raw"
 
 int main(int argc, char **argv) 
 {
+	// Initialization
+	std::cout << "Initialization of the node 'talker_pedals'" << std::endl;
 	ros::init(argc, argv, "talker_pedals");
 	
 	ros::NodeHandle n;
@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 	
 	ros::Rate loop_rate(1000);
 	
+	std::cout << "Running ..." << std::endl;
 	while(ros::ok())
 	{
 		std::ifstream f1("/sys/bus/iio/devices/iio:device0/in_voltage1_raw");
@@ -40,10 +41,11 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			//cout << "ERREUR: Impossible d'ouvrir le fichier en lecture" << end1;
+			std::cout << "ERREUR: Impossible d'ouvrir le fichier en lecture" << std::endl;
 		}
 		
 	}
 	
+	std::cout << "Finished" << std::endl;
 	return 0;
 }
